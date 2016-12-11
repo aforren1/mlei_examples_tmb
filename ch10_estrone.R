@@ -1,6 +1,8 @@
 library(TMB)
 library(lme4)
 
+# NB: Different data from the book?
+
 tmb_mod <- "
 #include <TMB.hpp>
 
@@ -35,7 +37,7 @@ Type objective_function<Type>::operator() ()
 
 
 
-filename <- tempfile(tmpdir = '')
+filename <- '/estrone'
 filedir <- tempdir()
 write(tmb_mod, paste0(filedir, filename, '.cpp'))
 compile(paste0(filedir, filename, '.cpp'))
@@ -57,7 +59,7 @@ params <- list(intercept = 0,
                u = rep(0, length(unique(estrone$id))))
 
 obj <- MakeADFun(data_list, params, random = c('u'),
-                 DLL = gsub("[^A-Za-z0-9]", "", filename))
+                 DLL = substring(filename, 2))
 
 opt <- do.call('optim', obj)
 
