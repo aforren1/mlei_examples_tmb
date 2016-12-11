@@ -8,21 +8,21 @@ data_list <- list(y = faithful$waiting)
 
 # need to get in the ballpark, or it'll flail
 # keep in mind that sd_* are log-transformed (need to exp() to get value)
-params <- list(mu_1 = 50,
+params <- list(mu_1 = 80,
                sd_1 = 1,
-               mu_2 = 80,
+               mu_2 = 50,
                sd_2 = 1, 
-               mix = 0.5)
+               mix = .5) 
 
 obj <- MakeADFun(data_list, params,
                  DLL = 'faithful')
 
-low <- list(mu_1 = 0, mu_2 = 0, 
+low <- list(mu_1 = -100, mu_2 = -100, 
             sd_1 = -100, sd_1 = -100,
-            mix = 0.001)
+            mix = 0)
 high <- list(mu_1 = 100, mu_2 = 100, 
             sd_1 = 100, sd_1 = 100,
-            mix = 0.999)
+            mix = 1)
 
 opt <- nlminb(obj$par, obj$fn,
               obj$gr, lower = low,
