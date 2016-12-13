@@ -10,6 +10,10 @@ params <- list(p = 0.4)
 obj <- MakeADFun(data_list, params,
                  DLL = 'binomial')
 
+# trivial simulation
+hist(replicate(10000, obj$simulate()$y/data_list$n), breaks = 50)
+
+
 low <- list(p = 0)
 high <- list(p = 1)
 

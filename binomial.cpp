@@ -9,5 +9,10 @@ Type objective_function<Type>::operator() ()
   
   Type nll = Type(0.0);
   nll -= dbinom(y, n, p, true);
+  
+  SIMULATE {
+    y = rbinom(n, p);
+    REPORT(y);
+  }
   return nll;
 }
