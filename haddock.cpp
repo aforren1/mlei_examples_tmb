@@ -14,5 +14,12 @@ Type objective_function<Type>::operator() ()
   for (i = 0; i < y.size(); i++) {
     nll -= dbinom(y[i], n[i], invlogit(intercept + slope * x[i]), true);
   }
+  
+  SIMULATE{
+    for (i = 0; i < y.size(); i++) {
+      y[i] = rbinom(n[i], invlogit(intercept + slope * x[i]));
+    }
+    REPORT(y);
+  }
   return nll;
 }

@@ -12,11 +12,14 @@ data_list <- list(y = haddock$codend,
                   n = haddock$codend + haddock$cover,
                   x = haddock$lenclass)
 
-params <- list(intercept = 0,
-               slope = 0)
+params <- list(intercept = -5,
+               slope = .3)
 
 obj <- MakeADFun(data_list, params,
                  DLL = 'haddock')
+
+# simulate example
+plot(obj$simulate()$y/data_list$n)
 
 low <- list(p = 0)
 high <- list(p = 1)
