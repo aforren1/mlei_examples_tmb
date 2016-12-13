@@ -25,5 +25,17 @@ Type objective_function<Type>::operator() ()
       total++;
     }
   }
+  
+  SIMULATE{
+    total = 0;
+    for (i = 0; i < u.size(); i++) {
+      u[i] = rnorm(Type(0.0), exp(log_sigma_re));
+      for (j = 0; j < obs_per_id(i); j++) {
+        measurement[total] = rnorm(intercept + u[i], exp(log_sigma));
+        total++;
+      }
+    }
+    REPORT(measurement);
+  }
   return nll;
 }
