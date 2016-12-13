@@ -17,5 +17,12 @@ Type objective_function<Type>::operator() ()
   for (i = 0; i < y.size(); i++) {
       nll -= dnorm(y[i], beta1 - beta2 * exp(-beta3 * age[i]), exp(log_sigma), true);
   }
+  
+  SIMULATE {
+    for (i = 0; i < y.size(); i++) {
+      y[i] = rnorm(beta1 - beta2 * exp(-beta3 * age[i]), exp(log_sigma));
+    }
+    REPORT(y);
+  }
   return nll;
 }

@@ -34,6 +34,9 @@ params <- list(beta1 = 57,
 obj <- MakeADFun(data_list, params,
                  DLL = 'vonb')
 
+# test simulation
+plot(obj$simulate()$y)
+
 opt <- do.call('optim', obj)
 
 # two nls examples
