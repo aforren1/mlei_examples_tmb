@@ -12,10 +12,13 @@ params <- list(mu_1 = 80,
                sd_1 = 1,
                mu_2 = 50,
                sd_2 = 1, 
-               mix = .5) 
+               mix = .3) 
 
 obj <- MakeADFun(data_list, params,
                  DLL = 'faithful')
+
+test_sim <- obj$simulate()$y
+hist(test_sim, breaks = 25)
 
 low <- list(mu_1 = -100, mu_2 = -100, 
             sd_1 = -100, sd_1 = -100,
