@@ -28,6 +28,18 @@ plot(obj$simulate()$measurement)
 
 opt <- do.call('optim', obj)
 
-preds <- sdreport(obj)$value
+obj_report <- sdreport(obj)
+preds <- data.frame(value = obj_report$value,
+                    std = obj_report$sd,
+                    id = estrone$id,
+                    t = rep(1:16, 5),
+                    raw = estrone$measurement)
+
+ggplot(preds, aes(x = t, y = value, colour = factor(id))) +
+  geom_ribbon(aes(ymin = value - std, ymax = value + std), colour = 'gray70', alpha = .3) +
+  geom_point()+
+  facet_wrap(~id) +
+  geom_point(colour = 'black', aes(y = raw))
   
+
 ref_mod <- lmer(measurement ~ 1 + (1|id), data = estrone)

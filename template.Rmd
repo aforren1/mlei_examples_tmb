@@ -1,0 +1,57 @@
+---
+title: "Template"
+output: html_notebook
+---
+
+This is a template for examples using Template Model Builder (get it?).
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+## Packages
+
+```{r packages}
+library(TMB)
+library(ggplot2)
+# other packages here (lme4, ...)
+
+```
+
+## Data
+
+```{r data}
+# data import here
+
+```
+
+## Exploratory plots
+
+```{r explore}
+
+```
+
+## Simulate with starting values(?)
+```{r sims}
+
+```
+
+## Compile/Fit TMB Model
+
+```{r fittmb}
+
+```
+
+## Compare to reference model (coefficients, predictions...)
+
+```{r fitcomp}
+
+```
+
+```{r coefs_se}
+
+```
+
+```{r preds}
+
+```
