@@ -1,3 +1,5 @@
+#setwd('~/R/mlei_book_tmb')
+
 library(TMB)
 library(lme4)
 
@@ -26,4 +28,6 @@ plot(obj$simulate()$measurement)
 
 opt <- do.call('optim', obj)
 
+preds <- sdreport(obj)$value
+  
 ref_mod <- lmer(measurement ~ 1 + (1|id), data = estrone)
