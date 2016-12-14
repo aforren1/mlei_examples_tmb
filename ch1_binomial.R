@@ -5,7 +5,7 @@ dyn.load(dynlib('binomial'))
 
 data_list <- list(y = 10, n = 100)
 
-params <- list(p = 0.4)
+params <- list(p = 0.15)
 
 obj <- MakeADFun(data_list, params,
                  DLL = 'binomial')
