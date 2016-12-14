@@ -14,6 +14,8 @@ Type objective_function<Type>::operator() ()
   ADREPORT(exp(log_sigma));
   ADREPORT(exp(log_sigma_re));
   
+  vector<Type> mu(measurement.size()); // predictions
+  
   Type nll = Type(0.0);
   int total, i, j;
   total = 0;
@@ -25,6 +27,17 @@ Type objective_function<Type>::operator() ()
       total++;
     }
   }
+  
+  // predict
+  total = 0;
+  for (i = 0; i < u.size(); i++) {
+    Type(re) = rnorm(Type(0.0), exp(log_sigma_re));
+    for (j = 0; j < obs_per_id(i); j++) {
+      mu[total] = intercept + re;
+      total++;
+    }
+  }
+  ADREPORT(mu);
   
   SIMULATE{
     total = 0;
